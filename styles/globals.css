@@ -1,16 +1,141 @@
-html,
-body {
-  padding: 0;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-family: 'DM Sans', 'Poppins', sans-serif;
+  --clr-red: #f51651;
+  --clr-gray: #777e90;
+  --clr-light: #fcfcfd;
+  --clr-purple: #9031f5;
+  --clr-cyan: #3cb9fc;
+  --clr-yellow: #fee440;
+  --clr-blue: #3772ff;
+  --clr-green: #35b890;
+  --clr-selection-bg: #cb3d92;
+  --clr-selection-text: #f4f0f0;
+  --clr-background: #141416;
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
+html {
+  scroll-behavior: smooth;
+  background: var(--clr-background);
+  font-family: var(--font-family);
 }
 
-* {
-  box-sizing: border-box;
+@layer base {
+  /* For whitespace on the sides varying with width */
+  .padding-alignment {
+    @apply sm:px-24 px-2;
+  }
+
+  .margin-alignment {
+    @apply sm:mx-24 mx-2;
+  }
+
+  /* Add this class to hide horizontal scrolls */
+  .hide-scroll-x::-webkit-scrollbar {
+    width: 0px;
+  }
+
+  /* Prevents blue highlight color of elements when tapped on phones */
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* DM SANS FONT */
+  @font-face {
+    font-family: 'DM Sans';
+    font-weight: 400;
+    src: url('/fonts/dm-sans/DMSans-Regular.woff2') format('woff2');
+    font-display: swap;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'DM Sans';
+    font-weight: 500;
+    src: url('/fonts/dm-sans/DMSans-Medium.woff2') format('woff2');
+    font-display: swap;
+    font-style: medium;
+  }
+  @font-face {
+    font-family: 'DM Sans';
+    font-weight: 700;
+    src: url('/fonts/dm-sans/DMSans-Bold.woff2') format('woff2');
+    font-display: swap;
+    font-style: bold;
+  }
+
+  /* POPPINS FONT */
+  @font-face {
+    font-family: 'Poppins';
+    font-weight: 100;
+    src: url('/fonts/poppins/Poppins-Thin.woff2') format('woff2');
+    font-display: swap;
+    font-style: thin;
+  }
+
+  @font-face {
+    font-family: 'Poppins';
+    font-weight: 200;
+    src: url('/fonts/poppins/Poppins-ExtraLight.woff2') format('woff2');
+    font-display: swap;
+    font-style: 'extra-light';
+  }
+
+  @font-face {
+    font-family: 'Poppins';
+    font-weight: 300;
+    src: url('/fonts/poppins/Poppins-Light.woff2') format('woff2');
+    font-display: swap;
+    font-style: light;
+  }
+
+  @font-face {
+    font-family: 'Poppins';
+    font-weight: 400;
+    src: url('/fonts/poppins/Poppins-Regular.woff2') format('woff2');
+    font-display: swap;
+    font-style: regular;
+  }
+
+  @font-face {
+    font-family: 'Poppins';
+    font-weight: 500;
+    src: url('/fonts/poppins/Poppins-Medium.woff2') format('woff2');
+    font-display: swap;
+    font-style: medium;
+  }
+
+  @font-face {
+    font-family: 'Poppins';
+    font-weight: 600;
+    src: url('/fonts/poppins/Poppins-SemiBold.woff2') format('woff2');
+    font-display: swap;
+    font-style: 'semi-bold';
+  }
+
+  @font-face {
+    font-family: 'Poppins';
+    font-weight: 700;
+    src: url('/fonts/poppins/Poppins-Bold.woff2') format('woff2');
+    font-display: swap;
+    font-style: bold;
+  }
+
+  @font-face {
+    font-family: 'Poppins';
+    font-weight: 800;
+    src: url('/fonts/poppins/Poppins-ExtraBold.woff2') format('woff2');
+    font-display: swap;
+    font-style: 'extra-bold';
+  }
+
+  @font-face {
+    font-family: 'Poppins';
+    font-weight: 900;
+    src: url('/fonts/poppins/Poppins-Black.woff2') format('woff2');
+    font-display: swap;
+    font-style: black;
+  }
 }

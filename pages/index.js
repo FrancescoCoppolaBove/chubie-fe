@@ -1,16 +1,13 @@
-import styles from "../styles/Home.module.css";
-import Accordion from "@mui/material/Accordion";
-import AccordionSummary from "@mui/material/AccordionSummary";
-import AccordionDetails from "@mui/material/AccordionDetails";
-import Typography from "@mui/material/Typography";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import Header from '../components/Header';
+import Footer from '../components/Footer';
 
 export default function Home() {
   return (
-    <div className={styles.container}>
-      <div>
-        <h1>CHUBIE</h1>
-      </div>
+    <div className="main-wrapper">
+      <>
+        <Header />
+        <Footer />
+      </>
     </div>
   );
 }
