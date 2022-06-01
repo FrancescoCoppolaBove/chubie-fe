@@ -16,6 +16,20 @@ const theme = createTheme({
     fontFamily: ['DM Sans', 'Poppins'].join(',')
   },
   components: {
+    MuiFormControlLabel: {
+      styleOverrides: {
+        root: {
+          fontFamily: 'Poppins'
+        }
+      }
+    },
+    MuiDialog: {
+      styleOverrides: {
+        root: {
+          backgroundColor: 'transparent'
+        }
+      }
+    },
     MuiButton: {
       variants: [
         {
@@ -24,13 +38,48 @@ const theme = createTheme({
             textTransform: 'capitalize',
             fontSize: '1rem',
             color: '#FCFCFD',
-            height: '40px',
+            height: '48px',
             boxShadow: '0 0 0 2px #353945 inset',
             borderRadius: '20px',
             padding: '0 16px',
             '&:hover': {
               boxShadow: '0 0 0 2px #3772ff inset',
               background: '#3772FF'
+            }
+          }
+        },
+        {
+          props: { variant: 'secondary' },
+          style: {
+            textTransform: 'none',
+            fontSize: '1rem',
+            color: '#FCFCFD',
+            height: '48px',
+            fontWeight: '700',
+            lineHeight: 1,
+            boxShadow: '0 0 0 2px #353945 inset',
+            borderRadius: '24px',
+            padding: '0 24px',
+            '&:hover': {
+              boxShadow: '0 0 0 2px #3772ff inset',
+              background: '#3772FF'
+            }
+          }
+        },
+        {
+          props: { variant: 'primary' },
+          style: {
+            textTransform: 'none',
+            lineHeight: 1,
+            fontSize: '1rem',
+            color: '#FCFCFD',
+            backgroundColor: '#3772FF',
+            height: '48px',
+            fontWeight: '700',
+            borderRadius: '24px',
+            padding: '0 24px',
+            '&:hover': {
+              background: '#044eff'
             }
           }
         }
@@ -69,7 +118,7 @@ const theme = createTheme({
       main: '#35b890'
     },
     error: {
-      main: red.A400
+      main: '#EF466F'
     }
   }
 });

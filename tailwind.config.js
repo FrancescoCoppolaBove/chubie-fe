@@ -8,7 +8,8 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        'dm-sans': ['DM Sans']
+        'dm-sans': ['DM Sans'],
+        poppins: ['Poppins']
       },
       colors: {
         'brand-red': 'var(--clr-red)',
@@ -23,5 +24,5 @@ module.exports = {
       }
     }
   },
-  plugins: []
+  plugins: [require('@tailwindcss/typography')]
 };
