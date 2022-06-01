@@ -9,7 +9,7 @@ import Divider from '@mui/material/Divider';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
 import { useState, useEffect } from 'react';
-import { useMoralis } from 'react-moralis';
+import { useMoralis, useMoralisWeb3Api } from 'react-moralis';
 import LoginDialog from '../components/login-dialog/Dialog';
 import Menu from '@mui/material/Menu';
 import Avatar from '@mui/material/Avatar';
@@ -61,12 +61,29 @@ const style = {
 };
 
 const Header = () => {
+  const Web3Api = useMoralisWeb3Api();
   const [anchorEl, setAnchorEl] = useState(null);
+  const [walletBalance, setWalletBalance] = useState(0);
   const openMenu = Boolean(anchorEl);
   const [open, setOpen] = useState(false);
   const [selectedValue, setSelectedValue] = useState('');
   const [menuMobileOpen, setMenuMobileOpen] = useState(false);
   const { authenticate, isAuthenticated, isAuthenticating, user, account, logout } = useMoralis();
+
+  const fetchNativeBalance = async () => {
+    const options = {
+      chain: 'bsc',
+      address: user.attributes.ethAddress
+    };
+    const bscBalance = await Web3Api.account.getNativeBalance(options);
+    setWalletBalance(+(+bscBalance.balance * Math.pow(10, -18)).toFixed(4));
+  };
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      fetchNativeBalance();
+    }
+  }, [isAuthenticated]);
 
   const handleClickMenu = (event) => {
     setAnchorEl(event.currentTarget);
@@ -173,7 +190,8 @@ const Header = () => {
             <IconButton className={style.menuProfileButton} onClick={handleClickMenu}>
               <Avatar className={style.headerAvatar} src="/images/avatar-creator.jpeg"></Avatar>
               <span className={style.headerWallet}>
-                7.0982<span className={style.headerCurrency}>BNB</span>
+                {+walletBalance}
+                <span className={style.headerCurrency}>BNB</span>
               </span>
             </IconButton>
           )}
@@ -228,7 +246,7 @@ const Header = () => {
                   <div className={style.textBalanceContainer}>
                     <span className={style.balanceLabel}>Balance</span>
                     <span className={style.balanceValue}>
-                      5.989 <span className={style.balanceCurrency}>BNB</span>
+                      {+walletBalance} <span className={style.balanceCurrency}>BNB</span>
                     </span>
                   </div>
                 </div>
