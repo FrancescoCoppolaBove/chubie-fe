@@ -11,6 +11,13 @@ import CloseIcon from '@mui/icons-material/Close';
 import { useState, useEffect } from 'react';
 import { useMoralis } from 'react-moralis';
 import LoginDialog from '../components/login-dialog/Dialog';
+import Menu from '@mui/material/Menu';
+import Avatar from '@mui/material/Avatar';
+import MenuItem from '@mui/material/MenuItem';
+import PersonIcon from '@mui/icons-material/Person';
+import ImageIcon from '@mui/icons-material/Image';
+import LogoutIcon from '@mui/icons-material/Logout';
+import ContentPasteIcon from '@mui/icons-material/ContentPaste';
 
 const style = {
   header: `items-center content-center border-b-[1px] border-b-[#666666] py-[1.25rem] px-[3rem] relative`,
@@ -32,14 +39,46 @@ const style = {
   buttonMobile: `w-full h-[3rem]`,
   navLinkMobile: `text-[2rem] cursor-pointer`,
   navItemMobile: `mb-[2rem]`,
-  containerLinkMobile: `px-[2rem]`
+  containerLinkMobile: `px-[2rem]`,
+  menuProfile: `px-[3rem] py-[4rem]`,
+  menuProfileButton: `h-[2.5rem] transition-shadow shadow-[inset_0_0_0_2px_#353945] relative flex items-center rounded-[1.25rem] text-[1rem] heading-[1.14286] font-bold text-brand-light p-[4px 16px 4px 4px] hover:shadow-[inset_0_0_0_2px_#3772ff]`,
+  headerAvatar: `w-[32px] h-[32px]`,
+  headerWallet: `pl-[0.75rem] text-[0.875rem]`,
+  headerCurrency: `text-brand-green font-bold text-[0.875rem] ml-[0.313rem]`,
+  userName: `text-[1.5rem] text-brand-light heading-[1.33333] font-bold font-semi-bold mb-[0.5rem]`,
+  balanceContainer: `flex flex-row items-center shadow-[0px_24px_24px_-8px_rgb(15_15_15/20%)] rounded-[1rem] p-[0.5rem] mb-[0.5rem]`,
+  logoBnbProfile: `w-[40px] h-[40px]`,
+  textBalanceContainer: `flex flex-col ml-[1rem]`,
+  balanceLabel: `font-poppins text-[#777E90] text-[0.75rem]`,
+  balanceValue: `text-[1.5rem] text-brand-light text-semi-bold font-poppins heading-[1.33333]`,
+  walletAddress: `flex flex-row items-center mb-[0.5rem] gap-3`,
+  address: `font-poppins font-medium text-[#777E90] text-[0.875rem]`,
+  pasteIcon: `h-[17px] w-[17px] text-[#3772FF] cursor-pointer hover:text-[#044eff] transition-color`,
+  menuItem: `flex flex-row gap-4 items-center text-[#777E90] cursor-pointer hover:text-[#3772FF] transition-color`,
+  menuItemIcon: `w-[20px] h-[20px]`,
+  menuItemLabel: `text-[0.875rem] font-bold`,
+  divider: `bg-[#353945]`
 };
 
 const Header = () => {
+  const [anchorEl, setAnchorEl] = useState(null);
+  const openMenu = Boolean(anchorEl);
   const [open, setOpen] = useState(false);
   const [selectedValue, setSelectedValue] = useState('');
   const [menuMobileOpen, setMenuMobileOpen] = useState(false);
   const { authenticate, isAuthenticated, isAuthenticating, user, account, logout } = useMoralis();
+
+  const handleClickMenu = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleCloseMenu = () => {
+    setAnchorEl(null);
+  };
+
+  useEffect(() => {
+    console.log('USER', user);
+  });
 
   const login = async (provider) => {
     if (!isAuthenticated) {
@@ -50,6 +89,16 @@ const Header = () => {
         .catch((error) => {
           console.log(error);
         });
+    }
+  };
+
+  const printTruncAddress = () => {
+    if (user) {
+      const address = user.attributes.ethAddress;
+      return address
+        .substr(0, 13)
+        .concat('...')
+        .concat(address.substr(address.length - 4, address.length));
     }
   };
 
@@ -66,9 +115,20 @@ const Header = () => {
 
     if (newValue) {
       setSelectedValue(newValue);
+      if (typeof window.ethereum === 'undefined') {
+        window.open('https://metamask.io/download/', '_blank').focus();
+      }
       if (['metamask', 'walletconnect'].includes(newValue)) {
         login(newValue);
       }
+    }
+  };
+
+  const copyAddressToClipboard = () => {
+    if (user) {
+      navigator.clipboard.writeText(user.attributes.ethAddress).then(() => {
+        alert('Copied to clipboard!');
+      });
     }
   };
 
@@ -105,17 +165,89 @@ const Header = () => {
               <SearchIcon sx={{ color: '#777E90' }} className={style.searchIcon} />
             </IconButton>
           </form>
-          {/* <Button onClick={handleOpenDialog} variant="small" disableElevation>
-            Connect Wallet
-          </Button> */}
           {!isAuthenticated ? (
             <Button onClick={handleOpenDialog} variant="small" disableElevation>
               Connect Wallet
             </Button>
           ) : (
-            <Button onClick={() => logOut()} variant="small" disableElevation>
-              Logout
-            </Button>
+            <IconButton className={style.menuProfileButton} onClick={handleClickMenu}>
+              <Avatar className={style.headerAvatar} src="/images/avatar-creator.jpeg"></Avatar>
+              <span className={style.headerWallet}>
+                7.0982<span className={style.headerCurrency}>BNB</span>
+              </span>
+            </IconButton>
+          )}
+          {isAuthenticated && (
+            <Menu
+              className={style.menuProfile}
+              anchorEl={anchorEl}
+              id="account-menu"
+              open={openMenu}
+              onClose={handleCloseMenu}
+              PaperProps={{
+                elevation: 0,
+                sx: {
+                  overflow: 'visible',
+                  filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
+                  backgroundColor: '#23262F',
+                  padding: '32px 16px 20px',
+                  '& .MuiPaper-root': {
+                    top: 74
+                  },
+                  '& .MuiAvatar-root': {
+                    width: 32,
+                    height: 32,
+                    ml: -0.5,
+                    mr: 1
+                  },
+                  '&:before': {
+                    content: '""',
+                    display: 'block',
+                    position: 'absolute',
+                    top: 0,
+                    right: 14,
+                    width: 10,
+                    height: 10,
+                    bgcolor: '#23262F',
+                    transform: 'translateY(-50%) rotate(45deg)',
+                    zIndex: 0
+                  }
+                }
+              }}
+              transformOrigin={{ horizontal: 'right', vertical: 'top' }}
+              anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
+            >
+              <div className={style.userContainer}>
+                <h4 className={style.userName}>Enrico Cole</h4>
+                <span className={style.walletAddress}>
+                  <span className={style.address}>{printTruncAddress()}</span>
+                  <ContentPasteIcon onClick={() => copyAddressToClipboard()} className={style.pasteIcon} />
+                </span>
+                <div className={style.balanceContainer}>
+                  <img className={style.logoBnbProfile} alt="logo bnb" src="/images/bnb-logo-profile.png"></img>
+                  <div className={style.textBalanceContainer}>
+                    <span className={style.balanceLabel}>Balance</span>
+                    <span className={style.balanceValue}>
+                      5.989 <span className={style.balanceCurrency}>BNB</span>
+                    </span>
+                  </div>
+                </div>
+                <MenuItem className={style.menuItem} disableRipple>
+                  <PersonIcon className={style.menuItemIcon} />
+                  <span className={style.menuItemLabel}>My profile</span>
+                </MenuItem>
+                <Divider className={style.divider} sx={{ my: 0.5 }} />
+                <MenuItem className={style.menuItem} disableRipple>
+                  <ImageIcon className={style.menuItemIcon} />
+                  <span className={style.menuItemLabel}>My items</span>
+                </MenuItem>
+                <Divider className={style.divider} sx={{ my: 0.5 }} />
+                <MenuItem className={style.menuItem} onClick={() => logOut()} disableRipple>
+                  <LogoutIcon className={style.menuItemIcon} />
+                  <span className={style.menuItemLabel}>Logout</span>
+                </MenuItem>
+              </div>
+            </Menu>
           )}
         </div>
 

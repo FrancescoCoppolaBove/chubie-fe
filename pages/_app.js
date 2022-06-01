@@ -17,8 +17,8 @@ export default function MyApp(props) {
 
   return (
     <MoralisProvider
-      serverUrl="https://bqqedvjnfcft.usemoralis.com:2053/server"
-      appId="PmaLDNrA1VUUmqZPmsX8ByH9k6RkcXHnhGg70xNw"
+      serverUrl="https://lul2x6agt3ev.usemoralis.com:2053/server"
+      appId="qAxLA36EWv2KHM7nGWxdEbuTQ5Y4U6zDZHyzNJHW"
     >
       <CacheProvider value={emotionCache}>
         <Head>
