@@ -7,7 +7,8 @@ import theme from '../src/theme';
 import createEmotionCache from '../src/createEmotionCache';
 import '../styles/globals.scss';
 import { MoralisProvider } from 'react-moralis';
-import useSWR, { SWRConfig } from 'swr';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 
 const clientSideEmotionCache = createEmotionCache();
 
@@ -19,23 +20,16 @@ export default function MyApp(props) {
       serverUrl="https://lul2x6agt3ev.usemoralis.com:2053/server"
       appId="qAxLA36EWv2KHM7nGWxdEbuTQ5Y4U6zDZHyzNJHW"
     >
-      <SWRConfig
-        value={{
-          refreshInterval: 3000,
-          fetcher: (resource, init) => fetch(resource, init).then((res) => res.json())
-        }}
-      >
-        <CacheProvider value={emotionCache}>
-          <Head>
-            <meta name="viewport" content="initial-scale=1, width=device-width" />
-          </Head>
-          <ThemeProvider theme={theme}>
-            {/* <CssBaseline /> */}
-            <Component {...pageProps} />
-          </ThemeProvider>
-          {/* <Component {...pageProps} /> */}
-        </CacheProvider>
-      </SWRConfig>
+      <CacheProvider value={emotionCache}>
+        <Head>
+          <meta name="viewport" content="initial-scale=1, width=device-width" />
+        </Head>
+        <ThemeProvider theme={theme}>
+          {/* <CssBaseline /> */}
+          <Component {...pageProps} />
+        </ThemeProvider>
+        {/* <Component {...pageProps} /> */}
+      </CacheProvider>
     </MoralisProvider>
   );
 }

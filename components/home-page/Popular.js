@@ -1,11 +1,8 @@
-import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import { useState, useEffect } from 'react';
 import Slider from 'react-slick';
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
 import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
 import IconButton from '@mui/material/IconButton';
 import Avatar from '@mui/material/Avatar';
@@ -82,7 +79,7 @@ const Popular = (props) => {
             </FormControl>
             {/* <CustomSelect value={type} onChange={handleChangeBox} /> */}
           </div>
-          <div className={style.timeFrameBox}>
+          {/* <div className={style.timeFrameBox}>
             <FormControl sx={{ m: 1, minWidth: 120 }}>
               <Select id="box-timeframe" value={timeframe} label="Timeframe" onChange={handleChangeTimeframeBox}>
                 <MenuItem key="today" value="today">
@@ -99,7 +96,7 @@ const Popular = (props) => {
                 </MenuItem>
               </Select>
             </FormControl>
-          </div>
+          </div> */}
           <div className={style.popularTimeframe}></div>
         </div>
         <div className={style.popularCarouselWrapper}>

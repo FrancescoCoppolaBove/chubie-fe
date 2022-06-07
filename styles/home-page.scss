@@ -6,3 +6,31 @@
     }
   }
 } */
+
+.slick-slide > div {
+  height: 100%;
+}
+
+.bid-image {
+  transition: transform 1s;
+}
+
+.bid-card {
+  &:hover {
+    .bid-image {
+      transform: scale(1.1);
+    }
+    .card-control {
+      visibility: visible;
+      opacity: 1;
+    }
+  }
+}
+
+.popular-button {
+  &:hover {
+    .favorite-bid-icon {
+      color: #fcfcfd;
+    }
+  }
+}

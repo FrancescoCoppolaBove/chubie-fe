@@ -2,16 +2,16 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import Main from '../components/home-page/Main';
 import TopCreators from '../components/home-page/TopCreators';
-import { getTopCreators, getLatestUploadCreators, getPopularCreators } from '../lib/fetch-utils';
+import { getTopCreators, getLatestUploadCreators, getPopularCreators, getHotBids } from '../lib/fetch-utils';
 import Popular from '../components/home-page/Popular';
 import Description from '../components/home-page/Description';
-import { useEffect } from 'react';
+import HotBid from '../components/home-page/HotBid';
 
 const style = {
   innerContent: ``
 };
 
-export default function Home({ creators, latestUploadCreators, popular }) {
+export default function Home({ creators, latestUploadCreators, popular, hotBids }) {
   return (
     <div className="main-wrapper">
       <>
@@ -20,6 +20,7 @@ export default function Home({ creators, latestUploadCreators, popular }) {
           <Main />
           <TopCreators creators={creators} latestUploadCreators={latestUploadCreators} />
           <Popular popular={popular} />
+          <HotBid hotBids={hotBids} />
           <Description />
         </div>
         <Footer />
@@ -32,5 +33,6 @@ export const getServerSideProps = async () => {
   const creators = await getTopCreators();
   const latestUploadCreators = await getLatestUploadCreators();
   const popular = await getPopularCreators();
-  return { props: { creators, latestUploadCreators, popular } };
+  const hotBids = await getHotBids();
+  return { props: { creators, latestUploadCreators, popular, hotBids } };
 };
