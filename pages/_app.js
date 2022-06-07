@@ -7,8 +7,7 @@ import theme from '../src/theme';
 import createEmotionCache from '../src/createEmotionCache';
 import '../styles/globals.scss';
 import { MoralisProvider } from 'react-moralis';
-// Client-side cache shared for the whole session
-// of the user in the browser.
+import useSWR, { SWRConfig } from 'swr';
 
 const clientSideEmotionCache = createEmotionCache();
 
@@ -20,16 +19,23 @@ export default function MyApp(props) {
       serverUrl="https://lul2x6agt3ev.usemoralis.com:2053/server"
       appId="qAxLA36EWv2KHM7nGWxdEbuTQ5Y4U6zDZHyzNJHW"
     >
-      <CacheProvider value={emotionCache}>
-        <Head>
-          <meta name="viewport" content="initial-scale=1, width=device-width" />
-        </Head>
-        <ThemeProvider theme={theme}>
-          {/* <CssBaseline /> */}
-          <Component {...pageProps} />
-        </ThemeProvider>
-        {/* <Component {...pageProps} /> */}
-      </CacheProvider>
+      <SWRConfig
+        value={{
+          refreshInterval: 3000,
+          fetcher: (resource, init) => fetch(resource, init).then((res) => res.json())
+        }}
+      >
+        <CacheProvider value={emotionCache}>
+          <Head>
+            <meta name="viewport" content="initial-scale=1, width=device-width" />
+          </Head>
+          <ThemeProvider theme={theme}>
+            {/* <CssBaseline /> */}
+            <Component {...pageProps} />
+          </ThemeProvider>
+          {/* <Component {...pageProps} /> */}
+        </CacheProvider>
+      </SWRConfig>
     </MoralisProvider>
   );
 }

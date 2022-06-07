@@ -1,3 +1,40 @@
-MuiPaper-root-MuiDialog-paper {
-  background-color: #23262f;
+.img-primary {
+  transition: transform 1s;
+}
+
+.primary-creator {
+  &:hover {
+    .img-primary {
+      transform: scale(1.1);
+    }
+    .icon-container {
+      opacity: 1;
+      visibility: visible;
+    }
+    .img-container {
+      &:before {
+        opacity: 1;
+        visibility: visible;
+        z-index: 10;
+      }
+    }
+  }
+}
+
+.containerLittleCreators {
+  &:hover {
+    .img-primary {
+      transform: scale(1.1);
+    }
+  }
+}
+
+.img-container {
+  &:before {
+    transition: all 0.2s;
+  }
+}
+
+.icon-container {
+  transition: all 0.2s;
 }

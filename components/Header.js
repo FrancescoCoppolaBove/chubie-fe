@@ -8,7 +8,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import Divider from '@mui/material/Divider';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useMoralis, useMoralisWeb3Api } from 'react-moralis';
 import LoginDialog from '../components/login-dialog/Dialog';
 import Menu from '@mui/material/Menu';
@@ -20,13 +20,12 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import ContentPasteIcon from '@mui/icons-material/ContentPaste';
 
 const style = {
-  header: `items-center content-center border-b-[1px] border-b-[#666666] py-[1.25rem] px-[3rem] relative`,
+  header: `items-center content-center border-b-[1px] border-b-[#666666] py-[1.25rem] px-[1.5rem]  md:px-[3rem] relative`,
   wrapper: `relative max-w-7xl items-center flex px-[2rem] md:px-[0] flex-row w-full justify-between content-center`,
-  logo: `mr-[2rem] text-[2rem] cursor-pointer`,
+  logo: `pr-[2rem] text-[2rem] cursor-pointer md:border-r-[1px] md:border-[#666666]`,
   leftHeader: `items-center`,
-  rightHeader: `hidden md:flex items-center`,
-  form: `relative w-[17rem] mr-[1rem]`,
-  divider: `hidden md:block bg-[#666666]`,
+  rightHeader: `flex items-center`,
+  form: `hidden md:block relative w-[17rem] mr-[1rem]`,
   containerLeft: `hidden md:flex`,
   nav: `flex`,
   navItem: `ml-[2rem] cursor-pointer `,
@@ -35,40 +34,57 @@ const style = {
   searchIcon: `hover:text-brand-blue`,
   inputSearch: `w-full`,
   mobileMenuIcon: `block md:hidden`,
-  menuMobile: `absolute bg-[#141416] md:hidden z-[10000] flex flex-col top-[77px] left-0 right-0 h-[calc(100vh-97px)] px-[3rem] py-[2rem] justify-between`,
+  menuMobile: `absolute bg-[#141416] md:hidden z-[1] flex flex-col top-[77px] left-0 right-0 h-[calc(100vh-97px)] px-[1.5rem] pb-[2rem] pt-[4rem] justify-between`,
   buttonMobile: `w-full h-[3rem]`,
   navLinkMobile: `text-[2rem] cursor-pointer`,
   navItemMobile: `mb-[2rem]`,
   containerLinkMobile: `px-[2rem]`,
   menuProfile: `px-[3rem] py-[4rem]`,
-  menuProfileButton: `h-[2.5rem] transition-shadow shadow-[inset_0_0_0_2px_#353945] relative flex items-center rounded-[1.25rem] text-[1rem] heading-[1.14286] font-bold text-brand-light p-[4px 16px 4px 4px] hover:shadow-[inset_0_0_0_2px_#3772ff]`,
+  menuProfileButton: `h-[2.5rem] transition-shadow md:shadow-[inset_0_0_0_2px_#353945] relative flex items-center rounded-[1.25rem] text-[1rem] leading-[1.14286] font-bold text-brand-light p-[4px 16px 4px 4px] md:hover:shadow-[inset_0_0_0_2px_#3772ff]  ml-[8rem] md:ml-0`,
   headerAvatar: `w-[32px] h-[32px]`,
-  headerWallet: `pl-[0.75rem] text-[0.875rem]`,
+  headerWallet: `hidden md:block pl-[0.75rem] text-[0.875rem]`,
   headerCurrency: `text-brand-green font-bold text-[0.875rem] ml-[0.313rem]`,
-  userName: `text-[1.5rem] text-brand-light heading-[1.33333] font-bold font-semi-bold mb-[0.5rem]`,
+  userName: `text-[1.5rem] text-brand-light leading-[1.33333] font-bold font-semibold mb-[0.5rem]`,
   balanceContainer: `flex flex-row items-center shadow-[0px_24px_24px_-8px_rgb(15_15_15/20%)] rounded-[1rem] p-[0.5rem] mb-[0.5rem]`,
   logoBnbProfile: `w-[40px] h-[40px]`,
   textBalanceContainer: `flex flex-col ml-[1rem]`,
   balanceLabel: `font-poppins text-[#777E90] text-[0.75rem]`,
-  balanceValue: `text-[1.5rem] text-brand-light text-semi-bold font-poppins heading-[1.33333]`,
+  balanceValue: `text-[1.5rem] text-brand-light font-semibold font-poppins leading-[1.33333]`,
   walletAddress: `flex flex-row items-center mb-[0.5rem] gap-3`,
   address: `font-poppins font-medium text-[#777E90] text-[0.875rem]`,
   pasteIcon: `h-[17px] w-[17px] text-[#3772FF] cursor-pointer hover:text-[#044eff] transition-color`,
   menuItem: `flex flex-row gap-4 items-center text-[#777E90] cursor-pointer hover:text-[#3772FF] transition-color`,
   menuItemIcon: `w-[20px] h-[20px]`,
   menuItemLabel: `text-[0.875rem] font-bold`,
-  divider: `bg-[#353945]`
+  divider: `bg-[#353945]`,
+  connectWalletHeaderButton: `hidden md:block`
 };
 
 const Header = () => {
-  const Web3Api = useMoralisWeb3Api();
   const [anchorEl, setAnchorEl] = useState(null);
+  const menuButtonRef = useRef();
+  const Web3Api = useMoralisWeb3Api();
   const [walletBalance, setWalletBalance] = useState(0);
-  const openMenu = Boolean(anchorEl);
+
   const [open, setOpen] = useState(false);
   const [selectedValue, setSelectedValue] = useState('');
   const [menuMobileOpen, setMenuMobileOpen] = useState(false);
   const { authenticate, isAuthenticated, isAuthenticating, user, account, logout } = useMoralis();
+
+  const handleClickMenu = () => {
+    setAnchorEl(menuButtonRef.current);
+  };
+
+  const handleCloseMenu = () => {
+    setAnchorEl(null);
+  };
+
+  useEffect(() => {
+    setAnchorEl(menuButtonRef.current);
+  }, [menuButtonRef]);
+
+  const openMenu = Boolean(anchorEl);
+  const id = openMenu ? 'simple-popover' : undefined;
 
   const fetchNativeBalance = async () => {
     const options = {
@@ -84,18 +100,6 @@ const Header = () => {
       fetchNativeBalance();
     }
   }, [isAuthenticated]);
-
-  const handleClickMenu = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleCloseMenu = () => {
-    setAnchorEl(null);
-  };
-
-  useEffect(() => {
-    console.log('USER', user);
-  });
 
   const login = async (provider) => {
     if (!isAuthenticated) {
@@ -152,11 +156,7 @@ const Header = () => {
   return (
     <AppBar position="static" className={style.header}>
       <div className={style.wrapper}>
-        <Stack
-          className={style.leftHeader}
-          direction="row"
-          divider={<Divider className={style.divider} orientation="vertical" flexItem />}
-        >
+        <Stack className={style.leftHeader} direction="row">
           <NextLink href="/">
             <span className={style.logo}>chubie</span>
           </NextLink>
@@ -183,11 +183,21 @@ const Header = () => {
             </IconButton>
           </form>
           {!isAuthenticated ? (
-            <Button onClick={handleOpenDialog} variant="small" disableElevation>
+            <Button
+              className={style.connectWalletHeaderButton}
+              onClick={handleOpenDialog}
+              variant="small"
+              disableElevation
+            >
               Connect Wallet
             </Button>
           ) : (
-            <IconButton className={style.menuProfileButton} onClick={handleClickMenu}>
+            <IconButton
+              ref={menuButtonRef}
+              aria-describedby={id}
+              className={style.menuProfileButton}
+              onClick={handleClickMenu}
+            >
               <Avatar className={style.headerAvatar} src="/images/avatar-creator.jpeg"></Avatar>
               <span className={style.headerWallet}>
                 {+walletBalance}
@@ -197,11 +207,11 @@ const Header = () => {
           )}
           {isAuthenticated && (
             <Menu
-              className={style.menuProfile}
-              anchorEl={anchorEl}
-              id="account-menu"
+              id={id}
               open={openMenu}
+              anchorEl={anchorEl}
               onClose={handleCloseMenu}
+              className={style.menuProfile}
               PaperProps={{
                 elevation: 0,
                 sx: {
@@ -297,9 +307,11 @@ const Header = () => {
           </ul>
         </div>
         <div className={style.containerActionsMobile}>
-          <Button className={style.buttonMobile} variant="small" disableElevation>
-            Connect Wallet
-          </Button>
+          {!isAuthenticated && (
+            <Button onClick={handleOpenDialog} className={style.buttonMobile} variant="small" disableElevation>
+              Connect Wallet
+            </Button>
+          )}
         </div>
       </div>
 

@@ -8,7 +8,7 @@ const style = {
   section: `pt-[10rem]`,
   wrapper: `max-w-7xl mx-auto items-center flex flex-col w-full`,
   topMain: `mb-[5rem] text-center`,
-  claimText: `font-poppins uppercase leading-[1] text-[#777E90] font-bold text-[0.75rem]`,
+  claimText: `font-poppins uppercase leading-none text-[#777E90] font-bold text-[0.75rem]`,
   title: `text-[2.5rem] font-dm-sans text-brand-light font-bold mb-[1rem]`,
   bottomMain: `flex flex-col md:flex-row w-full`,
   nftImageContainer: `w-2/4 mr-[8rem]`,
@@ -19,19 +19,19 @@ const style = {
   creatorProfile: `flex flex-row w-1/2 items-center`,
   infoPrice: `flex flex-row w-1/2 items-center`,
   containerFields: `ml-[1rem] flex flex-col`,
-  creatorLabel: `text-[#777E90] heading-[1.66667] text-[0.75rem] font-poppins capitalize`,
+  creatorLabel: `text-[#777E90] leading-[1.66667] text-[0.75rem] font-poppins capitalize`,
   creatorField: `text-brand-light text-[0.875rem] font-poppins font-medium`,
   bidContainer: `py-[1.875rem] px-[1rem] flex flex-col text-center rounded-[1.5rem] bg-[#23262F] mt-[3rem]`,
-  currentBid: `heading-[1.5] font-poppins text-[1rem] text-brand-light font-medium`,
-  bnbPrice: `text-[3rem] heading-[1.66667] font-dm-sans font-bold`,
-  usdPrice: `text-[1.5rem] text-[#777E90] font-poppins text-semi-bold mb-[1.5rem]`,
-  timerHeader: `font-poppins font-medium text-[1rem] heading-[1.5]`,
+  currentBid: `leading-[1.5] font-poppins text-[1rem] text-brand-light font-medium`,
+  bnbPrice: `text-[3rem] leading-[1.66667] font-dm-sans font-bold`,
+  usdPrice: `text-[1.5rem] text-[#777E90] font-poppins font-semibold mb-[1.5rem]`,
+  timerHeader: `font-poppins font-medium text-[1rem] leading-[1.5]`,
   buttons: `flex flex-col mt-[4rem] gap-5`,
   buttonPrimary: `bg-[#3772FF]`,
   timerContainer: `flex flex-row justify-center gap-12`,
   time: `flex flex-col`,
-  timeValue: `font-dm-sans text-[2rem] heading-[1.25] font-bold text-brand-light`,
-  timeLabel: `font-poppins heading-[1.5] text-[1rem] text-[#777E90]`
+  timeValue: `font-dm-sans text-[2rem] leading-[1.25] font-bold text-brand-light`,
+  timeLabel: `font-poppins leading-[1.5] text-[1rem] text-[#777E90]`
 };
 
 const Main = () => {

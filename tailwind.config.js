@@ -20,7 +20,8 @@ module.exports = {
         'brand-blue': 'var(--clr-blue)',
         'brand-green': 'var(--clr-green)',
         'brand-light': 'var(--clr-light)',
-        'brand-background': 'var(--clr-background)'
+        'brand-background': 'var(--clr-background)',
+        'image-black': 'rgba(20, 20, 22, 0.3)'
       }
     }
   },

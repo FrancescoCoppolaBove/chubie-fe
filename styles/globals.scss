@@ -2,9 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 @import './helpers.scss';
+@import './home-page.scss';
 
 :root {
-  --font-family: 'DM Sans', 'Poppins', sans-serif;
+  --font-family: 'Poppins', 'DM Sans', sans-serif;
   --clr-red: #f51651;
   --clr-gray: #777e90;
   --clr-light: #fcfcfd;
@@ -23,6 +24,7 @@ body {
   height: 100%;
   display: flex;
   flex-direction: column;
+  font-size: 0.875rem;
 }
 
 html {

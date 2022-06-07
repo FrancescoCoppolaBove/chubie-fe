@@ -5,7 +5,7 @@ import TwitterIcon from '@mui/icons-material/Twitter';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 
 const style = {
-  footer: `mt-[30rem] border-t-[#666666] border-t-[1px]`,
+  footer: `border-t-[#666666] border-t-[1px]`,
   footerContainer: `flex flex-col max-w-7xl mx-auto px-[3rem]`,
   topFooter: `flex flex-col md:flex-row border-b-[1px] border-b-[#666666] pt-[4rem] pb-[2rem]`,
   leftFooter: `w-full md:w-4/12 pb-[2.5rem] md:pb-[0] text-center md:text-left`,
