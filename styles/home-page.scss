@@ -34,3 +34,11 @@
     }
   }
 }
+
+.collection-item {
+  &:hover {
+    .collection-subtitle {
+      color: #3772ff;
+    }
+  }
+}
