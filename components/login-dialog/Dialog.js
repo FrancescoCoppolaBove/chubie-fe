@@ -33,7 +33,6 @@ const LoginDialog = (props) => {
   };
 
   const handleOk = (value) => {
-    console.log('PROP', value);
     onClose(value);
   };
 

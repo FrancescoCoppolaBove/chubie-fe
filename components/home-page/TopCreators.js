@@ -1,9 +1,12 @@
 import NextLink from 'next/link';
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import Avatar from '@mui/material/Avatar';
 import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
 import { fromWeiToEth } from '../../utils/utils';
 import Button from '@mui/material/Button';
+import { fetcher } from '../../lib/fetch-utils';
+import useSwr from 'swr';
+import Skeleton from '@mui/material/Skeleton';
 
 const style = {
   section: `py-[8rem]`,
@@ -42,7 +45,12 @@ const style = {
   infoContainer: `grow-1`
 };
 
-const TopCreators = ({ creators, latestUploadCreators }) => {
+const TopCreators = () => {
+  const [creators, setCreators] = useState([]);
+
+  const topCreatorsRes = useSwr('/api/top-creators', fetcher);
+  const latestUploadCreatorsRes = useSwr('/api/latest-upload-creators', fetcher);
+
   return (
     <section className={style.section}>
       <div className={style.wrapper}>
@@ -53,73 +61,100 @@ const TopCreators = ({ creators, latestUploadCreators }) => {
                 <div className={style.containerIcon}>
                   <ArrowRightAltIcon className={style.arrowIcon} />
                 </div>
-                <img className={style.imgPrimary} alt="nft image" src={creators.creators[0]?.nftImage}></img>
+                {topCreatorsRes.data ? (
+                  <img
+                    className={style.imgPrimary}
+                    alt="nft image"
+                    src={topCreatorsRes.data.creators[0].nftImage}
+                  ></img>
+                ) : (
+                  <Skeleton variant="rectangular" width={210} height={118}></Skeleton>
+                )}
               </div>
-              <div className={style.creatorContainer}>
-                <div className={style.leftSide}>
-                  <Avatar
-                    className={style.avatarPrimary}
-                    alt="creator avatar"
-                    src={creators.creators[0]?.author.avatar}
-                  />
-                  <div className={style.info}>
-                    <span className={style.title}>{creators.creators[0]?.title}</span>
-                    <span className={style.inStock}>1 of {creators.creators[0]?.inStock}</span>
+              {topCreatorsRes.data ? (
+                <div className={style.creatorContainer}>
+                  <div className={style.leftSide}>
+                    <Avatar
+                      className={style.avatarPrimary}
+                      alt="creator avatar"
+                      src={topCreatorsRes.data.creators[0]?.author.avatar}
+                    />
+                    <div className={style.info}>
+                      <span className={style.title}>{topCreatorsRes.data.creators[0]?.title}</span>
+                      <span className={style.inStock}>1 of {topCreatorsRes.data.creators[0]?.inStock}</span>
+                    </div>
+                  </div>
+                  <div className={style.highestBid}>
+                    <span className={style.label}>Highest bid</span>
+                    <span className={style.value}>
+                      {fromWeiToEth(topCreatorsRes.data.creators[0]?.highestBid, 3) + ' BNB'}
+                    </span>
                   </div>
                 </div>
-                <div className={style.highestBid}>
-                  <span className={style.label}>Highest bid</span>
-                  <span className={style.value}>{fromWeiToEth(creators.creators[0]?.highestBid, 3) + ' BNB'}</span>
-                </div>
-              </div>
+              ) : (
+                <Skeleton variant="text"></Skeleton>
+              )}
+              ()
             </div>
           </NextLink>
           <div className={style.otherCreators}>
-            {creators.creators.map((creator, index) => {
-              if (index > 0) {
-                return (
-                  <NextLink href="/">
-                    <div key={index} className={style.containerLittleCreators}>
-                      <div className={`${style.imgContainer} ${style.imgLittleContainer}`}>
-                        <div className={style.containerIcon}>
-                          <ArrowRightAltIcon className={style.arrowIcon} />
+            {!topCreatorsRes.data ? (
+              <Skeleton variant="text"></Skeleton>
+            ) : (
+              topCreatorsRes.data.creators.map((creator, index) => {
+                if (index > 0) {
+                  return (
+                    <NextLink href="/">
+                      <div key={index} className={style.containerLittleCreators}>
+                        <div className={`${style.imgContainer} ${style.imgLittleContainer}`}>
+                          <div className={style.containerIcon}>
+                            <ArrowRightAltIcon className={style.arrowIcon} />
+                          </div>
+                          <img className={style.imgPrimary} alt="nft image" src={creator?.nftImage}></img>
                         </div>
-                        <img className={style.imgPrimary} alt="nft image" src={creator?.nftImage}></img>
-                      </div>
-                      <div className={style.infoContainer}>
-                        <span className={style.secondTitle}>{creator?.title}</span>
-                        <div className={style.userInfoContainer}>
-                          <Avatar alt="creator avatar" className={style.avatarSecondary} src={creator?.author.avatar} />
-                          <span className={style.value}>{fromWeiToEth(creator?.highestBid, 3) + ' BNB'}</span>
-                          <span className={style.stockSecondary}>1 of {creator?.inStock}</span>
+                        <div className={style.infoContainer}>
+                          <span className={style.secondTitle}>{creator?.title}</span>
+                          <div className={style.userInfoContainer}>
+                            <Avatar
+                              alt="creator avatar"
+                              className={style.avatarSecondary}
+                              src={creator?.author.avatar}
+                            />
+                            <span className={style.value}>{fromWeiToEth(creator?.highestBid, 3) + ' BNB'}</span>
+                            <span className={style.stockSecondary}>1 of {creator?.inStock}</span>
+                          </div>
+                          <Button variant="secondary">Place a bid</Button>
                         </div>
-                        <Button variant="secondary">Place a bid</Button>
                       </div>
-                    </div>
-                  </NextLink>
-                );
-              }
-            })}
+                    </NextLink>
+                  );
+                }
+              })
+            )}
           </div>
         </div>
         <div className={style.sideBar}>
           <span className={style.infoSidebar}>Latest upload from creators</span>
           <div className={style.listSidebar}>
-            {latestUploadCreators.creators.map((creator, index) => {
-              return (
-                <div key={index} className={style.userSidebar}>
-                  <Avatar className={style.avatarSidebar} alt="creator avatar" src={creator.author.avatar} />
-                  <div className={style.descriptionSidebar}>
-                    <span className={style.nameSidebar}>
-                      {creator.author.name} {creator.author.surname}
-                    </span>
-                    <span className={style.priceSidebar}>
-                      {fromWeiToEth(creators.creators[0]?.highestBid, 3) + ' BNB'}
-                    </span>
+            {!latestUploadCreatorsRes.data ? (
+              <Skeleton variant="text"></Skeleton>
+            ) : (
+              latestUploadCreatorsRes.data.creators.map((creator, index) => {
+                return (
+                  <div key={index} className={style.userSidebar}>
+                    <Avatar className={style.avatarSidebar} alt="creator avatar" src={creator.author.avatar} />
+                    <div className={style.descriptionSidebar}>
+                      <span className={style.nameSidebar}>
+                        {creator.author.name} {creator.author.surname}
+                      </span>
+                      <span className={style.priceSidebar}>
+                        {fromWeiToEth(latestUploadCreatorsRes.data.creators[0]?.highestBid, 3) + ' BNB'}
+                      </span>
+                    </div>
                   </div>
-                </div>
-              );
-            })}
+                );
+              })
+            )}
           </div>
           <Button variant="secondary">
             Discover more <ArrowRightAltIcon className={style.arrowIconSidebarButton} />

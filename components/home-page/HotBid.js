@@ -8,6 +8,9 @@ import { fromWeiToEth } from '../../utils/utils';
 import CandlestickChartIcon from '@mui/icons-material/CandlestickChart';
 import styled, { createGlobalStyle } from 'styled-components';
 import FavoriteIcon from '@mui/icons-material/Favorite';
+import useSWR from 'swr';
+import { fetcher } from '../../lib/fetch-utils';
+import Skeleton from '@mui/material/Skeleton';
 
 const style = {
   hotSection: `py-[8rem]`,
@@ -36,8 +39,9 @@ const style = {
   bidValue: `text-[#FCFCFD] font-semibold ml-[0.125rem]`
 };
 
-const HotBid = ({ hotBids }) => {
-  console.log('HOT BIDS: ', hotBids);
+const HotBid = () => {
+  const { data, error } = useSWR('/api/hot-bids', fetcher);
+
   const settings = {
     dots: false,
     infinite: true,
@@ -64,54 +68,58 @@ const HotBid = ({ hotBids }) => {
         <div className={style.hotInner}>
           <SliderStyle />
           <Slider {...settings}>
-            {hotBids.bids.map((bid, index) => {
-              return (
-                <div key={index} className={style.bidSlide}>
-                  <div className={style.bidCard}>
-                    <div className={style.bidCardPreview}>
-                      <img alt="nft image" src={bid.nftImage} className={style.bidImage} />
-                      <div className={style.cardControl}>
-                        <div className={style.statusGreen}>purchasing !</div>
-                        <button className={style.popularButton}>
-                          {bid.favorite === 'false' ? (
-                            <FavoriteBorderIcon className={style.favoriteBid} />
-                          ) : (
-                            <FavoriteIcon className={style.favoriteIconFull} />
-                          )}
-                        </button>
-                        <Button variant="secondary" className={style.bidButton}>
-                          Place a bid <AutoGraphIcon className={style.arrowIconSidebarButton} />
-                        </Button>
+            {!data ? (
+              <Skeleton></Skeleton>
+            ) : (
+              data.bids.map((bid, index) => {
+                return (
+                  <div key={index} className={style.bidSlide}>
+                    <div className={style.bidCard}>
+                      <div className={style.bidCardPreview}>
+                        <img alt="nft image" src={bid.nftImage} className={style.bidImage} />
+                        <div className={style.cardControl}>
+                          <div className={style.statusGreen}>purchasing !</div>
+                          <button className={style.popularButton}>
+                            {bid.favorite === 'false' ? (
+                              <FavoriteBorderIcon className={style.favoriteBid} />
+                            ) : (
+                              <FavoriteIcon className={style.favoriteIconFull} />
+                            )}
+                          </button>
+                          <Button variant="secondary" className={style.bidButton}>
+                            Place a bid <AutoGraphIcon className={style.arrowIconSidebarButton} />
+                          </Button>
+                        </div>
                       </div>
+                      <NextLink href="/">
+                        <div className={style.cardLink}>
+                          <div className={style.cardBody}>
+                            <div className={style.cardLine}>
+                              <div className={style.cardTitle}>{bid.title}</div>
+                              <div className={style.cardPrice}>{fromWeiToEth(bid.price, 3) + ' BNB'}</div>
+                            </div>
+                            <div className={style.cardLine}>
+                              <div className={style.cardCounter}>{bid.inStock} in stock</div>
+                            </div>
+                          </div>
+                          <div className={style.cardFoot}>
+                            <div className={style.cardStatus}>
+                              <CandlestickChartIcon className={style.cardStatusIcon} />
+                              Highest bid
+                              <span className={style.bidValue}>{fromWeiToEth(bid.highestBid, 3) + ' BNB'}</span>
+                            </div>
+                            <div className={style.cardBid}>
+                              New bid <span className={style.emojFire}>🔥</span>
+                            </div>
+                          </div>
+                          <div></div>
+                        </div>
+                      </NextLink>
                     </div>
-                    <NextLink href="/">
-                      <div className={style.cardLink}>
-                        <div className={style.cardBody}>
-                          <div className={style.cardLine}>
-                            <div className={style.cardTitle}>{bid.title}</div>
-                            <div className={style.cardPrice}>{fromWeiToEth(bid.price, 3) + ' BNB'}</div>
-                          </div>
-                          <div className={style.cardLine}>
-                            <div className={style.cardCounter}>{bid.inStock} in stock</div>
-                          </div>
-                        </div>
-                        <div className={style.cardFoot}>
-                          <div className={style.cardStatus}>
-                            <CandlestickChartIcon className={style.cardStatusIcon} />
-                            Highest bid
-                            <span className={style.bidValue}>{fromWeiToEth(bid.highestBid, 3) + ' BNB'}</span>
-                          </div>
-                          <div className={style.cardBid}>
-                            New bid <span className={style.emojFire}>🔥</span>
-                          </div>
-                        </div>
-                        <div></div>
-                      </div>
-                    </NextLink>
                   </div>
-                </div>
-              );
-            })}
+                );
+              })
+            )}
           </Slider>
         </div>
       </div>

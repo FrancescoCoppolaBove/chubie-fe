@@ -16,6 +16,20 @@ const theme = createTheme({
     fontFamily: ['DM Sans', 'Poppins'].join(',')
   },
   components: {
+    MuiInputBase: {
+      styleOverrides: {
+        root: {
+          outline: 'none'
+        }
+      }
+    },
+    MuiOutlineInputNotchedOutline: {
+      styleOverrides: {
+        root: {
+          outline: 'none'
+        }
+      }
+    },
     MuiFormControlLabel: {
       styleOverrides: {
         root: {

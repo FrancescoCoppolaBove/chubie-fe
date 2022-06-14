@@ -3,6 +3,7 @@
 @tailwind utilities;
 @import './helpers.scss';
 @import './home-page.scss';
+@import './select.scss';
 
 :root {
   --font-family: 'Poppins', 'DM Sans', sans-serif;
@@ -35,6 +36,22 @@ html {
 }
 
 @layer base {
+  div,
+  input,
+  textarea,
+  select,
+  button,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  a,
+  span,
+  a:focus {
+    outline: none;
+  }
   /* For whitespace on the sides varying with width */
   .padding-alignment {
     @apply sm:px-24 px-2;

@@ -1,30 +1,19 @@
 import Cors from 'cors';
+import initMiddleware from '../../lib/init-middleware';
 
-// Initializing the cors middleware
-const cors = Cors({
-  methods: ['GET', 'HEAD']
-});
+// Initialize the cors middleware
+const cors = initMiddleware(
+  // You can read more about the available options here: https://github.com/expressjs/cors#configuration-options
+  Cors({
+    // Only allow requests with GET, POST and OPTIONS
+    methods: ['GET', 'POST', 'OPTIONS']
+  })
+);
 
-// Helper method to wait for a middleware to execute before continuing
-// And to throw an error when an error happens in a middleware
-function runMiddleware(req, res, fn) {
-  return new Promise((resolve, reject) => {
-    fn(req, res, (result) => {
-      if (result instanceof Error) {
-        return reject(result);
-      }
-
-      return resolve(result);
-    });
-  });
-}
-
-async function handler(req, res) {
-  // Run the middleware
-  await runMiddleware(req, res, cors);
+export default async function handler(req, res) {
+  // Run cors
+  await cors(req, res);
 
   // Rest of the API logic
-  res.json();
+  res.json({ message: 'Hello Everyone!' });
 }
-
-export default handler;

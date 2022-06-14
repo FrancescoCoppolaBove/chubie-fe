@@ -2,6 +2,9 @@ import Slider from 'react-slick';
 import styled, { createGlobalStyle } from 'styled-components';
 import NextLink from 'next/link';
 import Avatar from '@mui/material/Avatar';
+import useSWR from 'swr';
+import { fetcher } from '../../lib/fetch-utils';
+import Skeleton from '@mui/material/Skeleton';
 
 const style = {
   collectionsSection: `bg-[#23262F] py-[8rem] antialiased`,
@@ -22,6 +25,8 @@ const style = {
 };
 
 const HotCollections = ({ hotCollections }) => {
+  const { data, error } = useSWR('/api/hot-collections', fetcher);
+
   const settings = {
     dots: false,
     infinite: true,
@@ -48,38 +53,42 @@ const HotCollections = ({ hotCollections }) => {
           <div className={style.collectionInner}>
             <SliderStyle />
             <Slider {...settings}>
-              {hotCollections.hotCollections.map((collection, index) => {
-                return (
-                  <a key={index} href={`/${collection.id}`} className={style.collectionItem}>
-                    <div className={style.collectionGallery}>
-                      {collection.nftImages.map((nftImage, index) => {
-                        return (
-                          <div key={index} className={style.collectionPreview}>
-                            <img className={style.collectionImage} alt="nft image" src={nftImage.src} />
-                          </div>
-                        );
-                      })}
-                    </div>
-                    <div className={style.collectionSubtitle}>{collection.collectionTitle}</div>
-                    <div className={style.collectionLine}>
-                      <div className={style.collectionUser}>
-                        <Avatar
-                          className={style.collectionAvatar}
-                          alt="creator"
-                          src={collection.author.avatar}
-                        ></Avatar>
-                        <div className={style.collectionAuthor}>
-                          By{' '}
-                          <span className={style.collectionAuthorName}>
-                            {collection.author.name + ' ' + collection.author.surname}
-                          </span>
-                        </div>
+              {!data ? (
+                <Skeleton></Skeleton>
+              ) : (
+                data.hotCollections.map((collection, index) => {
+                  return (
+                    <a key={index} href={`/${collection.id}`} className={style.collectionItem}>
+                      <div className={style.collectionGallery}>
+                        {collection.nftImages.map((nftImage, index) => {
+                          return (
+                            <div key={index} className={style.collectionPreview}>
+                              <img className={style.collectionImage} alt="nft image" src={nftImage.src} />
+                            </div>
+                          );
+                        })}
                       </div>
-                      <div className={style.collectionCounter}>{collection.inStock + ' items'}</div>
-                    </div>
-                  </a>
-                );
-              })}
+                      <div className={style.collectionSubtitle}>{collection.collectionTitle}</div>
+                      <div className={style.collectionLine}>
+                        <div className={style.collectionUser}>
+                          <Avatar
+                            className={style.collectionAvatar}
+                            alt="creator"
+                            src={collection.author.avatar}
+                          ></Avatar>
+                          <div className={style.collectionAuthor}>
+                            By{' '}
+                            <span className={style.collectionAuthorName}>
+                              {collection.author.name + ' ' + collection.author.surname}
+                            </span>
+                          </div>
+                        </div>
+                        <div className={style.collectionCounter}>{collection.inStock + ' items'}</div>
+                      </div>
+                    </a>
+                  );
+                })
+              )}
             </Slider>
           </div>
         </div>

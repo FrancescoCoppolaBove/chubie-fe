@@ -3,10 +3,20 @@ const nextConfig = {
   reactStrictMode: true,
   experimental: { images: { layoutRaw: true } },
   env: {
-    BASE_URL: `http://localhost:3001/`
+    BASE_URL: `http://localhost:3000/`,
+    mock: true
   },
   async headers() {
-    return [{ source: '/(.*)', headers: [{ key: 'Access-Control-Allow-Origin', value: '*' }] }];
+    return [
+      {
+        source: '/:path*',
+        headers: [
+          { key: 'Access-Control-Allow-Origin', value: '*' }
+          /* { key: 'Accept', value: 'application/json' },
+          { key: 'Content-Type', value: 'application/json' } */
+        ]
+      }
+    ];
   }
 };
 

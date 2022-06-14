@@ -1,0 +1,14 @@
+:root {
+  .MuiSelect-icon {
+    color: #fcfcfd;
+    font-size: 2rem;
+    box-shadow: inset 0 0 0 2px #353945;
+    border-radius: 50%;
+  }
+
+  .MuiOutlinedInput-root.Mui-focused {
+    box-shadow: inset 0 0 0 2px #777e90;
+    outline: none;
+    border: none;
+  }
+}
