@@ -14,20 +14,18 @@ const style = {
 
 export default function Home({ creators, latestUploadCreators, popular, hotBids, hotCollections }) {
   return (
-    <div className="main-wrapper">
-      <>
-        <Header />
-        <div className={style.innerContent}>
-          <Main />
-          <TopCreators />
-          <Popular />
-          <HotBid />
-          <HotCollections />
-          <Discover />
-          <Description />
-        </div>
-        <Footer />
-      </>
-    </div>
+    <>
+      <Header />
+      <div className={style.innerContent}>
+        <Main />
+        <TopCreators />
+        <Popular />
+        <HotBid />
+        <HotCollections />
+        <Discover />
+        <Description />
+      </div>
+      <Footer />
+    </>
   );
 }

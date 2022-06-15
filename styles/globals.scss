@@ -36,6 +36,11 @@ html {
 }
 
 @layer base {
+  input[type='number']::-webkit-inner-spin-button {
+    opacity: 1;
+    background: transparent;
+  }
+
   div,
   input,
   textarea,

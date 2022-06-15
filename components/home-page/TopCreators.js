@@ -94,7 +94,6 @@ const TopCreators = () => {
               ) : (
                 <Skeleton variant="text"></Skeleton>
               )}
-              ()
             </div>
           </NextLink>
           <div className={style.otherCreators}>

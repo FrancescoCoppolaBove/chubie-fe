@@ -32,7 +32,7 @@ const style = {
   avatarBody: `relative`,
   popularAvatar: `popular-avatar relative w-[4rem] h-[4rem] transition-all mx-auto mb-[1rem]`,
   reward: `absolute right-[-4px] bottom-[10px]`,
-  popularName: `mb-[0.125rem] font-medium`,
+  popularName: `mb-[0.125rem] font-medium whitespace-nowrap`,
   popularPrice: `text-[#777E90] leading-[1.66667] text-[0.75rem]`,
   priceValue: `font-semibold text-[#E6E8EC]`,
   discoverFieldLabel: `mb-[0.625rem] text-[1.5rem] capitalize leading-[1.33333] font-semibold text-[#B1B5C3] ml-[0.625rem]`,

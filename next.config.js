@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: true,
+  reactStrictMode: false,
   experimental: { images: { layoutRaw: true } },
   env: {
     BASE_URL: `http://localhost:3000/`,

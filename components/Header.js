@@ -163,7 +163,7 @@ const Header = () => {
           <div className={style.containerLeft}>
             <ul className={style.nav}>
               <li className={style.navItem}>
-                <NextLink href="/">
+                <NextLink href="/discover">
                   <span className={style.navLink}>Discover</span>
                 </NextLink>
               </li>

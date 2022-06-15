@@ -5,6 +5,13 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 const theme = createTheme({
   components: {
+    MuiFormControl: {
+      styleOverrides: {
+        root: {
+          width: '100%'
+        }
+      }
+    },
     MuiOutlinedInput: {
       styleOverrides: {
         notchedOutline: {
@@ -60,7 +67,7 @@ const theme = createTheme({
         }), */
         root: {
           maxWidth: '15rem',
-          width: '11.25rem',
+          width: '100%',
           color: '#fcfcfd',
           backgroundColor: '#141416',
           boxShadow: 'inset 0 0 0 2px #353945',
@@ -82,8 +89,8 @@ const theme = createTheme({
 const ChubieSelect = (props) => {
   return (
     <ThemeProvider theme={theme}>
-      <FormControl sx={{ m: 1 }}>
-        <Select type={props.type} value={props.value} onChange={(e) => props.handleChange(e)}>
+      <FormControl className={props.className} sx={{ m: 1 }}>
+        <Select name={props.name} type={props.type} value={props.value} onChange={(e) => props.handleChange(e)}>
           {props.options?.map((option, index) => {
             return (
               <MenuItem key={index} value={option.value}>
