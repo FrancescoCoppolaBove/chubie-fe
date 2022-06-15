@@ -212,7 +212,7 @@ const Discover = () => {
           </div>
         </div>
         <div className={style.discoverList}>
-          <div className={style.discoverSorting} id="scrollableDiv">
+          <div className={style.discoverSorting}>
             {nfts && nfts.length
               ? nfts.map((collection, index) => {
                   return (
