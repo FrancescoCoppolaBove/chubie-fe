@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { optionsLikes, optionsColors, optionsCreator, optionsRangeCurrency } from '../../../const/const';
-import ChubieInput from '../../Input/ChubieInput';
-import ChubieSelect from '../../Select/ChubieSelect';
+import ChubieInput from '../../ui/Input/ChubieInput';
+import ChubieSelect from '../../ui/Select/ChubieSelect';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import { Button } from '@mui/material';
 

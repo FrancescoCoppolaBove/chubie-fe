@@ -1,4 +1,4 @@
-import Catalog from '../components/discover-page/Catalog';
+import Catalog from '../components/modules/discover-page/Catalog';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 

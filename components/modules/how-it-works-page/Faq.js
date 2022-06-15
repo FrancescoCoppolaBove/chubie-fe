@@ -1,10 +1,10 @@
 import { useState } from 'react';
 
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { generalFaqs, navTabs, supportFaqs, hostingFaqs, productFaqs } from '../../const/faqs';
+import { generalFaqs, navTabs, supportFaqs, hostingFaqs, productFaqs } from '../../../const/faqs';
 
 import { Accordion, AccordionDetails, AccordionSummary } from '@mui/material';
-import ChubieAccordion from '../Accordion/ChubieAccordion';
+import ChubieAccordion from '../../ui/Accordion/ChubieAccordion';
 
 const style = {
   faqSection: `py-[8rem]`,

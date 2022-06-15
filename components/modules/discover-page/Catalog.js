@@ -3,13 +3,13 @@ import SearchIcon from '@mui/icons-material/Search';
 import InputBase from '@mui/material/InputBase';
 import Button from '@mui/material/Button';
 import axios from 'axios';
-import ChubieInput from '../Input/ChubieInput';
+import ChubieInput from '../../ui/Input/ChubieInput';
 import { useState, useEffect } from 'react';
-import ChubieSelect from '../Select/ChubieSelect';
-import { optionsTime, navFilters } from '../../const/const';
-import CatalogForm from '../forms/catalog-form/CatalogForm';
+import ChubieSelect from '../../ui/Select/ChubieSelect';
+import { optionsTime, navFilters } from '../../../const/const';
+import CatalogForm from '../../forms/catalog-form/CatalogForm';
 import { Skeleton } from '@mui/material';
-import ChubieCard from '../Card/ChubieCard';
+import ChubieCard from '../../ui/Card/ChubieCard';
 
 const style = {
   catalogSection: `py-[8rem]`,

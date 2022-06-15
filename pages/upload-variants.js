@@ -1,19 +1,19 @@
 import Footer from '../components/Footer';
 import Header from '../components/Header';
-import Faq from '../components/modules/how-it-works-page/Faq';
+import UploadVariants from '../components/modules/upload-variants-page/UploadVariants';
 
 const style = {};
 
-const HowItWorksPage = () => {
+const UploadVariantsPage = () => {
   return (
     <>
       <Header />
       <div className={style.innerContent}>
-        <Faq />
+        <UploadVariants />
       </div>
       <Footer />
     </>
   );
 };
 
-export default HowItWorksPage;
+export default UploadVariantsPage;

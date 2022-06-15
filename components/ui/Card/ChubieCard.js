@@ -5,7 +5,7 @@ import AutoGraphIcon from '@mui/icons-material/AutoGraph';
 import CandlestickChartIcon from '@mui/icons-material/CandlestickChart';
 import NextLink from 'next/link';
 
-import { fromWeiToEth } from '../../utils/utils';
+import { fromWeiToEth } from '../../../utils/utils';
 
 const style = {
   bidCardPreview: `relative rounded-[1rem] overflow-hidden`,

@@ -3,8 +3,8 @@ import Slider from 'react-slick';
 import styled, { createGlobalStyle } from 'styled-components';
 import useSWR from 'swr';
 
-import { fetcher } from '../../lib/fetch-utils';
-import ChubieCard from '../Card/ChubieCard';
+import { fetcher } from '../../../lib/fetch-utils';
+import ChubieCard from '../../ui/Card/ChubieCard';
 
 const style = {
   hotSection: `py-[8rem]`,

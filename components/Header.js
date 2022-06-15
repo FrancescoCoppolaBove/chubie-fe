@@ -57,7 +57,8 @@ const style = {
   menuItemIcon: `w-[20px] h-[20px]`,
   menuItemLabel: `text-[0.875rem] font-bold`,
   divider: `bg-[#353945]`,
-  connectWalletHeaderButton: `hidden md:block`
+  connectWalletHeaderButton: `hidden md:block`,
+  uploadBtn: `hidden md:inline-flex mr-[0.875rem] bg-[#3772FF] h-[2.5rem] rounded-[1.25rem] py-0 px-[1.125rem] text-[0.875rem] inline-flex items-center justify-center font-dm-sans text-center leading-[1]`
 };
 
 const Header = () => {
@@ -168,7 +169,7 @@ const Header = () => {
                 </NextLink>
               </li>
               <li className={style.navItem}>
-                <NextLink href="/">
+                <NextLink href="/how-it-works">
                   <span className={style.navLink}>How it works</span>
                 </NextLink>
               </li>
@@ -182,6 +183,13 @@ const Header = () => {
               <SearchIcon sx={{ color: '#777E90' }} className={style.searchIcon} />
             </IconButton>
           </form>
+          {isAuthenticated && (
+            <NextLink href="/upload-variants">
+              <Button variant="primary" className={style.uploadBtn}>
+                Upload
+              </Button>
+            </NextLink>
+          )}
           {!isAuthenticated ? (
             <Button
               className={style.connectWalletHeaderButton}
@@ -295,12 +303,12 @@ const Header = () => {
         <div className={style.containerLinkMobile}>
           <ul className={style.navMobile}>
             <li className={style.navItemMobile}>
-              <NextLink href="/">
+              <NextLink href="/discover">
                 <span className={`${style.navLinkMobile} ${style.navLink}`}>Discover</span>
               </NextLink>
             </li>
             <li className={style.navItemMobile}>
-              <NextLink href="/">
+              <NextLink href="/how-it-works">
                 <span className={`${style.navLinkMobile} ${style.navLink}`}>How it works</span>
               </NextLink>
             </li>

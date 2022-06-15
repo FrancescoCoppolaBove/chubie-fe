@@ -12,9 +12,9 @@ import {
   optionsRangeCurrency
 } from '../../../const/const';
 
-import ChubieCard from '../ui/Card/ChubieCard';
-import ChubieInput from '../ui/Input/ChubieInput';
-import ChubieSelect from '../ui/Select/ChubieSelect';
+import ChubieCard from '../../ui/Card/ChubieCard';
+import ChubieInput from '../../ui/Input/ChubieInput';
+import ChubieSelect from '../../ui/Select/ChubieSelect';
 
 const style = {
   discoverSection: `py-[8rem]`,

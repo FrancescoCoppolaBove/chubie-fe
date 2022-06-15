@@ -1,12 +1,12 @@
-import ChubieSelect from '../Select/ChubieSelect';
+import ChubieSelect from '../../ui/Select/ChubieSelect';
 import { useState, useEffect } from 'react';
 import Slider from 'react-slick';
 import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
 import IconButton from '@mui/material/IconButton';
 import Avatar from '@mui/material/Avatar';
-import { fromWeiToEth } from '../../utils/utils';
+import { fromWeiToEth } from '../../../utils/utils';
 import useSWR from 'swr';
-import { fetcher } from '../../lib/fetch-utils';
+import { fetcher } from '../../../lib/fetch-utils';
 import Skeleton from '@mui/material/Skeleton';
 import EmojiEventsOutlinedIcon from '@mui/icons-material/EmojiEventsOutlined';
 import DiamondOutlinedIcon from '@mui/icons-material/DiamondOutlined';
