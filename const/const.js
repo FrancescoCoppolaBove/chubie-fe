@@ -46,3 +46,11 @@ export const optionsTime = [
   { value: 'newest', description: 'Newest' },
   { value: 'oldest', description: 'Oldest' }
 ];
+
+export const optionsRoyalties = [
+  { value: '1%', description: '1%' },
+  { value: '2%', description: '2%' },
+  { value: '3%', description: '3%' },
+  { value: '4%', description: '4%' },
+  { value: '5%', description: '5%' }
+];

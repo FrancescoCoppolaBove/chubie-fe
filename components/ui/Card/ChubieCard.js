@@ -52,7 +52,7 @@ const ChubieCard = ({ nftImage, favorite, link, title, price, inStock, highestBi
           <div className={style.cardBody}>
             <div className={style.cardLine}>
               <div className={style.cardTitle}>{title}</div>
-              <div className={style.cardPrice}>{fromWeiToEth(price, 3) + ' BNB'}</div>
+              <div className={style.cardPrice}>{price ? fromWeiToEth(price, 3) : 1 + ' BNB'}</div>
             </div>
             <div className={style.cardLine}>
               <div className={style.cardCounter}>{inStock} in stock</div>
@@ -62,7 +62,7 @@ const ChubieCard = ({ nftImage, favorite, link, title, price, inStock, highestBi
             <div className={style.cardStatus}>
               <CandlestickChartIcon className={style.cardStatusIcon} />
               Highest bid
-              <span className={style.bidValue}>{fromWeiToEth(highestBid, 3) + ' BNB'}</span>
+              <span className={style.bidValue}>{highestBid ? fromWeiToEth(highestBid, 3) : 1 + ' BNB'}</span>
             </div>
             <div className={style.cardBid}>
               New bid <span className={style.emojFire}>🔥</span>

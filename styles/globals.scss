@@ -7,7 +7,7 @@
 
 :root {
   --font-family: 'Poppins', 'DM Sans', sans-serif;
-  --clr-red: #f51651;
+  --clr-red: #ef466f;
   --clr-gray: #777e90;
   --clr-light: #fcfcfd;
   --clr-purple: #9031f5;
@@ -28,6 +28,35 @@ body {
   font-size: 1rem;
 }
 
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type='number'] {
+  -moz-appearance: textfield;
+}
+
+div,
+input,
+textarea,
+select,
+button,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+a,
+span,
+a:focus {
+  outline: none;
+}
+
 html {
   scroll-behavior: smooth;
   background: var(--clr-background);
@@ -41,22 +70,6 @@ html {
     background: transparent;
   }
 
-  div,
-  input,
-  textarea,
-  select,
-  button,
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6,
-  a,
-  span,
-  a:focus {
-    outline: none;
-  }
   /* For whitespace on the sides varying with width */
   .padding-alignment {
     @apply sm:px-24 px-2;
