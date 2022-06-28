@@ -14,7 +14,7 @@ import ChubieCard from '../ui/Card/ChubieCard';
 import { useState, useEffect } from 'react';
 import { optionsRoyalties } from '../../const/const';
 import { Button } from '@mui/material';
-import { fromWeiToEth } from '../../utils/utils';
+import { fromWeiToEth } from '../../utils/index';
 
 const style = {
   uploadSection: `py-[8rem]`,
@@ -53,7 +53,9 @@ const style = {
   uploadCreateBtn: `bg-[#3772FF]`,
   uploadArrowIcon: `ml-[0.938rem] w-[1.4rem]`,
   uploadPreview: `shrink-0 w-[22rem]`,
-  uploadPreviewInner: `bg-[#141416] shadow-[inset_0_0_0_1px_#353945] p-[3rem] rounded-[1rem]`
+  uploadPreviewInner: `bg-[#141416] shadow-[inset_0_0_0_1px_#353945] p-[3rem] rounded-[1rem]`,
+  uploadIcon: `mb-[0.5rem]`,
+  uploadDropZoneInnerBox: `flex flex-col items-center`
 };
 
 const Upload = () => {
@@ -194,7 +196,12 @@ const Upload = () => {
                   <div className={style.uploadCategory}>Upload file*</div>
                   <div className={style.uploadNote}>Drag or choose your file to upload</div>
                   <div className={style.uploadFile}>
-                    <DropZone files={files} setFiles={setFiles} />
+                    <DropZone
+                      dropZoneInnerBox={style.uploadDropZoneInnerBox}
+                      dropZoneUploadIcon={style.uploadIcon}
+                      files={files}
+                      setFiles={setFiles}
+                    />
                   </div>
                 </div>
                 <div className={style.uploadItem}>

@@ -1,4 +1,5 @@
 import { discoverMock } from '../../assets/data/discoverMock';
+import { paginatedMiddleware } from './middleware/paginated-middleware';
 
 const handler = (req, res) => {
   const { page, limit } = req.query;

@@ -6,7 +6,7 @@ import LinkedInIcon from '@mui/icons-material/LinkedIn';
 
 const style = {
   footer: `border-t-[#666666] border-t-[1px]`,
-  footerContainer: `flex flex-col max-w-7xl mx-auto px-[3rem]`,
+  footerContainer: `flex flex-col max-w-7xl mx-auto`,
   topFooter: `flex flex-col md:flex-row border-b-[1px] border-b-[#666666] pt-[4rem] pb-[2rem]`,
   leftFooter: `w-full md:w-4/12 pb-[2.5rem] md:pb-[0] text-center md:text-left`,
   logo: `text-brand-light text-[2rem] font-bold pb-[1.2rem] cursor-pointer`,

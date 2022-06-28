@@ -45,6 +45,24 @@ const theme = createTheme({
       }
     },
     MuiButton: {
+      styleOverrides: {
+        root: {
+          display: 'inline-flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          height: '3rem',
+          padding: '0 1.5rem',
+          backgroundColor: '#3772FF',
+          borderRadius: '1.5rem',
+          fontFamily: 'DM Sans',
+          fontSize: '1rem',
+          fontWeight: 700,
+          lineHeight: 1,
+          textAlign: 'center',
+          color: '#FCFCFD',
+          transition: 'all .2s'
+        }
+      },
       variants: [
         {
           props: { variant: 'small' },

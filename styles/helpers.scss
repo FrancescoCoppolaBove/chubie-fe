@@ -2,6 +2,16 @@
   transition: transform 1s;
 }
 
+.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.disable {
+  opacity: 0;
+  visibility: hidden;
+}
+
 .primary-creator {
   &:hover {
     .img-primary {

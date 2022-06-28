@@ -72,6 +72,7 @@ const ChubieInput = (props) => {
           type={props.type}
           error={props.error}
           value={props.value}
+          multiline={props.isTextarea}
           onChange={(e) => props.handleChange(e)}
           onBlur={(e) => (props.handleBlur ? props.handleBlur(e) : null)}
           helperText={props.helperText ? props.helperText : ''}

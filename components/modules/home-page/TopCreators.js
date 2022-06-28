@@ -2,9 +2,9 @@ import NextLink from 'next/link';
 import { useState, useEffect } from 'react';
 import Avatar from '@mui/material/Avatar';
 import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
-import { fromWeiToEth } from '../../../utils/utils';
+import { fromWeiToEth } from '../../../utils/index';
 import Button from '@mui/material/Button';
-import { fetcher } from '../../../lib/fetch-utils';
+import { fetcher } from '../../../lib/index';
 import useSwr from 'swr';
 import Skeleton from '@mui/material/Skeleton';
 

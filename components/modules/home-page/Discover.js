@@ -57,7 +57,6 @@ const Discover = () => {
 
   const loadEightNfts = () => {
     const eightNfts = [];
-    // console.log('CURRENT PAGE: ', currentPage);
     axios.get(`/api/discover?limit=8&page=${currentPage}`).then(({ data }) => {
       data.data.forEach((nft) => eightNfts.push(nft));
       setNfts((nfts) => [...nfts, ...eightNfts]);

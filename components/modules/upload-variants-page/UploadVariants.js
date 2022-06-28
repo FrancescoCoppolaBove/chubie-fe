@@ -1,12 +1,9 @@
 import { Button } from '@mui/material';
 import NextLink from 'next/link';
 import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
+import Control from '../../ui/Control/Controls';
 
 const style = {
-  control: `py-[1.5rem] border-b-[1px] border-[#353945]`,
-  controlCenter: `max-w-7xl mx-auto flex flex-col w-full`,
-  backHomeBtn: `mr-auto h-[2.5rem] text-[0.875rem]`,
-  backHomeIcon: `rotate-180 mr-[0.938rem]`,
   variantsSection: `pt-[5rem] pb-[8rem] text-center`,
   variantsCenter: `max-w-[56rem] mx-auto flex flex-col w-full px-[5rem]`,
   variantsTop: `max-w-[46rem] mx-auto mb-[5rem]`,
@@ -22,15 +19,7 @@ const style = {
 const UploadVariants = () => {
   return (
     <>
-      <div className={style.control}>
-        <div className={style.controlCenter}>
-          <NextLink href="/">
-            <Button variant="secondary" className={style.backHomeBtn}>
-              <ArrowRightAltIcon className={style.backHomeIcon} /> Back to home
-            </Button>
-          </NextLink>
-        </div>
-      </div>
+      <Control backLink={'/'} backText={'Back to home'} />
       <div className={style.variantsSection}>
         <div className={style.variantsCenter}>
           <div className={style.variantsTop}>

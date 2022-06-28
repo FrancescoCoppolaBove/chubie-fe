@@ -1,11 +1,7 @@
 import { useDropzone } from 'react-dropzone';
 import { useState, useEffect, useMemo } from 'react';
 import UploadFileIcon from '@mui/icons-material/UploadFile';
-
-const dropZoneStyle = {
-  innerBox: `flex flex-col items-center`,
-  uploadIcon: `mb-[0.5rem]`
-};
+import { Button } from '@mui/material';
 
 const baseStyle = {
   display: 'flex',
@@ -33,7 +29,17 @@ const rejectStyle = {
   borderColor: '#ff1744'
 };
 
-const DropZone = ({ files, setFiles }) => {
+const DropZone = ({
+  files,
+  setFiles,
+  customStyle,
+  className,
+  dropZoneInnerBox,
+  dropZoneUploadIcon,
+  showSaveButton = false,
+  styleSaveButton,
+  handleSaveBtn
+}) => {
   const { acceptedFiles, getRootProps, getInputProps, isFocused, isDragAccept, isDragReject } = useDropzone({
     maxSize: 1e8,
     maxFiles: 1,
@@ -57,6 +63,7 @@ const DropZone = ({ files, setFiles }) => {
   const style = useMemo(
     () => ({
       ...baseStyle,
+      ...customStyle,
       ...(isFocused ? focusedStyle : {}),
       ...(isDragAccept ? acceptStyle : {}),
       ...(isDragReject ? rejectStyle : {})
@@ -71,17 +78,21 @@ const DropZone = ({ files, setFiles }) => {
 
   return (
     <>
-      <div {...getRootProps({ style })}>
+      <div {...getRootProps({ style })} className={className}>
         <input {...getInputProps()} />
-        <div className={dropZoneStyle.innerBox}>
-          <UploadFileIcon className={dropZoneStyle.uploadIcon} />
-          <p>Drag &quot;and&quot; drop some files here, or click to select files</p>
+        <div className={dropZoneInnerBox}>
+          <UploadFileIcon className={dropZoneUploadIcon} />
+          <p>Drag and drop some files here, or click to select files</p>
         </div>
         <aside>
-          <h4>Files</h4>
           <ul>{filesToShow}</ul>
         </aside>
       </div>
+      {showSaveButton && (
+        <Button onClick={(e) => handleSaveBtn(e)} className={styleSaveButton}>
+          Save photo
+        </Button>
+      )}
     </>
   );
 };

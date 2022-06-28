@@ -8,7 +8,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import Divider from '@mui/material/Divider';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useContext, createContext } from 'react';
 import { useMoralis, useMoralisWeb3Api } from 'react-moralis';
 import LoginDialog from '../components/login-dialog/Dialog';
 import Menu from '@mui/material/Menu';
@@ -268,10 +268,12 @@ const Header = () => {
                     </span>
                   </div>
                 </div>
-                <MenuItem className={style.menuItem} disableRipple>
-                  <PersonIcon className={style.menuItemIcon} />
-                  <span className={style.menuItemLabel}>My profile</span>
-                </MenuItem>
+                <NextLink href="/profile">
+                  <MenuItem className={style.menuItem} disableRipple>
+                    <PersonIcon className={style.menuItemIcon} />
+                    <span className={style.menuItemLabel}>My profile</span>
+                  </MenuItem>
+                </NextLink>
                 <Divider className={style.divider} sx={{ my: 0.5 }} />
                 <MenuItem className={style.menuItem} disableRipple>
                   <ImageIcon className={style.menuItemIcon} />

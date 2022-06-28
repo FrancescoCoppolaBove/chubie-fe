@@ -3,7 +3,7 @@ import Slider from 'react-slick';
 import styled, { createGlobalStyle } from 'styled-components';
 import useSWR from 'swr';
 
-import { fetcher } from '../../../lib/fetch-utils';
+import { fetcher } from '../../../lib/index';
 import ChubieCard from '../../ui/Card/ChubieCard';
 
 const style = {

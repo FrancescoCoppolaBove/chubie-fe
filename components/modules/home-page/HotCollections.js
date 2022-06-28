@@ -3,7 +3,7 @@ import styled, { createGlobalStyle } from 'styled-components';
 import NextLink from 'next/link';
 import Avatar from '@mui/material/Avatar';
 import useSWR from 'swr';
-import { fetcher } from '../../../lib/fetch-utils';
+import { fetcher } from '../../../lib/index';
 import Skeleton from '@mui/material/Skeleton';
 
 const style = {

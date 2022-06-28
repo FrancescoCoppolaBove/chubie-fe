@@ -5,12 +5,12 @@ import AutoGraphIcon from '@mui/icons-material/AutoGraph';
 import CandlestickChartIcon from '@mui/icons-material/CandlestickChart';
 import NextLink from 'next/link';
 
-import { fromWeiToEth } from '../../../utils/utils';
+import { fromWeiToEth } from '../../../utils/index';
 
 const style = {
   bidCardPreview: `relative rounded-[1rem] overflow-hidden`,
   cardControl: `card-control absolute z-[3] top-0 left-0 w-full h-full bg-[rgba(35,38,47,0.2)] rounded-[1rem] transition-all duration-300 opacity-0 invisible`,
-  statusGreen: `absolute  top-[0.688rem] left-[0.5rem] bg-[#45B26B] inline-block px-[0.5rem] rounded-[0.25rem] leading-[1.625rem] font-bold uppercase text-[#FCFCFD]`,
+  statusGreen: `absolute top-[0.688rem] left-[0.5rem] bg-[#45B26B] inline-block px-[0.5rem] rounded-[0.25rem] leading-[1.625rem] text-[0.75rem] font-bold uppercase text-[#FCFCFD]`,
   popularButton: `popular-button absolute top-[0.5rem] right-[0.5rem] w-[2rem] h-[2rem] shadow-[0px_8px_16px_rgb(15_15_15_/_20%)] rounded-[50%] bg-[#23262F] items-center justify-center flex`,
   favoriteBid: `favorite-bid-icon w-[1.25rem] h-[1.25rem] text-[#777E90] transition-all duration-200`,
   favoriteIconFull: `w-[1.25rem] h-[1.25rem] text-[#EF466F]`,
@@ -25,7 +25,7 @@ const style = {
   cardCounter: `text-[#E6E8EC]`,
   cardFoot: `border-t-[1px] border-t-[#353945] flex items-center justify-between mt-[0.75rem] pt-[0.75rem] text-[0.75rem] leading-[1.66667] text-[#777E90]`,
   cardStatusIcon: `text-[#777E90] w-[1.25rem] h-[1.25rem] mt-[-0.125rem] mr-[0.25rem]`,
-  bidValue: `text-[#FCFCFD] font-semibold ml-[0.125rem]`
+  bidValue: `text-[#FCFCFD] font-semibold ml-[0.5rem]`
 };
 
 const ChubieCard = ({ nftImage, favorite, link, title, price, inStock, highestBid }) => {
@@ -52,7 +52,7 @@ const ChubieCard = ({ nftImage, favorite, link, title, price, inStock, highestBi
           <div className={style.cardBody}>
             <div className={style.cardLine}>
               <div className={style.cardTitle}>{title}</div>
-              <div className={style.cardPrice}>{price ? fromWeiToEth(price, 3) : 1 + ' BNB'}</div>
+              <div className={style.cardPrice}>{(price ? fromWeiToEth(price, 3) : 1) + ' BNB'}</div>
             </div>
             <div className={style.cardLine}>
               <div className={style.cardCounter}>{inStock} in stock</div>
@@ -62,7 +62,7 @@ const ChubieCard = ({ nftImage, favorite, link, title, price, inStock, highestBi
             <div className={style.cardStatus}>
               <CandlestickChartIcon className={style.cardStatusIcon} />
               Highest bid
-              <span className={style.bidValue}>{highestBid ? fromWeiToEth(highestBid, 3) : 1 + ' BNB'}</span>
+              <span className={style.bidValue}>{(highestBid ? fromWeiToEth(highestBid, 3) : 1) + ' BNB'}</span>
             </div>
             <div className={style.cardBid}>
               New bid <span className={style.emojFire}>🔥</span>
