@@ -147,7 +147,7 @@ const theme = createTheme({
       main: '#19857b'
     },
     success: {
-      main: '#35b890'
+      main: '#45b26b'
     },
     error: {
       main: '#EF466F'
