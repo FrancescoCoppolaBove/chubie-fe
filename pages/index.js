@@ -18,9 +18,7 @@ const style = {
 
 export default function Home({ creators, latestUploadCreators, popular, hotBids, hotCollections }) {
   const { web3, isWeb3Enabled, web3EnableError, enableWeb3, isInitialized, account, user } = useMoralis();
-  const { fetch } = useMoralisQuery('_User', (query) => query.equalTo('objectId', 'GHZKO16CMD3rJaHV9Lc58yUr'), [], {
-    autoFetch: false
-  });
+  const { fetch } = useMoralisQuery('Collections');
   /* const { fetch } = useMoralisQuery('Collections', (query) => query.find(), [], {
     autoFetch: false
   }); */

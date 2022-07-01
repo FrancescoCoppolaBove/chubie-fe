@@ -18,7 +18,7 @@ const clientSideEmotionCache = createEmotionCache();
 export default function MyApp(props) {
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
 
-  if (!process.env.MORALIS_APP_ID || !process.env.MORALIS_SERVER_URL) {
+  if (!process.env.NEXT_PUBLIC_APP_ID || !process.env.NEXT_PUBLIC_SERVER_URL) {
     return (
       <CacheProvider value={emotionCache}>
         <Head>
@@ -48,7 +48,7 @@ export default function MyApp(props) {
     );
   }
   return (
-    <MoralisProvider appId={process.env.MORALIS_APP_ID || ''} serverUrl={process.env.MORALIS_SERVER_URL || ''}>
+    <MoralisProvider appId={process.env.NEXT_PUBLIC_APP_ID || ''} serverUrl={process.env.NEXT_PUBLIC_SERVER_URL || ''}>
       <CacheProvider value={emotionCache}>
         <Head>
           <meta name="viewport" content="initial-scale=1, width=device-width" />
